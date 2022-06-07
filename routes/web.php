@@ -14,9 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('guest.home');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware('auth')
+->prefix('admin') //legato all URI
+->name('admin.')
+->namespace('Admin')
+->group( function(){
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::resource('posts', 'PostController');
+});
