@@ -84,17 +84,36 @@
 /******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */,
-/* 1 */
-/*!*********************************************!*\
-  !*** multi ./resources/js/deleteMessage.js ***!
-  \*********************************************/
+/******/ ({
+
+/***/ "./resources/js/delete-form.js":
+/*!*************************************!*\
+  !*** ./resources/js/delete-form.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var deleteForms = document.querySelectorAll('.delete-form');
+deleteForms.forEach(function (form) {
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var confirmation = confirm('Sei sicuro di voler eliminare il dato?');
+    if (confirmation) e.target.submit();
+  });
+});
+
+/***/ }),
+
+/***/ 1:
+/*!*******************************************!*\
+  !*** multi ./resources/js/delete-form.js ***!
+  \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-!(function webpackMissingModule() { var e = new Error("Cannot find module 'C:\\Users\\matte\\OneDrive\\Desktop\\Projects\\VsCode\\Boolean-58\\laravel-auth\\resources\\js\\deleteMessage.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+module.exports = __webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\Projects\VsCode\Boolean-58\laravel-auth\resources\js\delete-form.js */"./resources/js/delete-form.js");
 
 
 /***/ })
-/******/ ]);
+
+/******/ });

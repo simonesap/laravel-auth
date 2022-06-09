@@ -27,7 +27,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -38,7 +38,34 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'title'
+        ]);
+
+        $request->validate([
+            'content'
+        ]);
+
+        $request->validate([
+            'image'
+        ]);
+
+        $request->validate([
+            'slug'
+        ]);
+
+
+        $posts = $request->all();
+
+        $post = new Post();
+
+        $post->fill($posts);
+
+        $post->save();
+
+        return redirect()->route('admin.posts.index', compact('post'));
+
     }
 
     /**
@@ -47,9 +74,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
+        return view('admin.posts.show', compact('post'));
     }
 
     /**
@@ -58,9 +85,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -70,9 +97,20 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'title','content','image','slug'
+        ]);
+
+        $post = $request->all();
+
+        $new_post = new Post();
+        $new_post->fill($post);
+        $new_post->save();
+
+        return redirect()->route('admin.posts.index', $new_post)->with('message', "Hai aggiornato con successo $new_post->title");
+
     }
 
     /**
@@ -81,8 +119,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->route('admin.posts.index', compact('post'))->with('message', "Hai eliminato con successo $post->title");
     }
 }
