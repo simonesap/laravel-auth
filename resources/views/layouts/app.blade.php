@@ -35,7 +35,7 @@
                     <ul class="navbar-nav mr-auto">
 
                         <li>
-                            <a href="">Posts</a>
+                            <a href="{{ route('admin.posts.index')}}">Posts</a>
                         </li>
 
                     </ul>
